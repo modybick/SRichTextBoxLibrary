@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperRichTextBoxLib", "SRichTextBoxLibrary\SuperRichTextBoxLib.csproj", "{9D3757ED-EC43-41F9-8423-EC8EB7E16808}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{4FE91858-F38A-4A63-9226-E2B8B2BF4882}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9D3757ED-EC43-41F9-8423-EC8EB7E16808}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D3757ED-EC43-41F9-8423-EC8EB7E16808}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D3757ED-EC43-41F9-8423-EC8EB7E16808}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D3757ED-EC43-41F9-8423-EC8EB7E16808}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FE91858-F38A-4A63-9226-E2B8B2BF4882}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FE91858-F38A-4A63-9226-E2B8B2BF4882}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FE91858-F38A-4A63-9226-E2B8B2BF4882}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FE91858-F38A-4A63-9226-E2B8B2BF4882}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
