@@ -33,7 +33,7 @@ namespace SRichTextBoxLibrary
             }
 
             if (e.KeyCode == Keys.I && e.Control)
-            {   //Itaric
+            {   //Itaric [ctrl+I]
                 toggleFontStyle(FontStyle.Italic);
                 e.SuppressKeyPress = true;
             }
