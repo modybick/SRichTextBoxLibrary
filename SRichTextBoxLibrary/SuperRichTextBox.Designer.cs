@@ -28,9 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.printDialog1 = new System.Windows.Forms.PrintDialog();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.SuspendLayout();
             // 
-            // SRichTextBox
+            // printDialog1
+            // 
+            this.printDialog1.Document = this.printDocument1;
+            this.printDialog1.UseEXDialog = true;
+            // 
+            // SuperRichTextBox
             // 
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SRichTextBox_KeyDown);
             this.ResumeLayout(false);
@@ -38,5 +45,8 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.PrintDialog printDialog1;
+        private System.Drawing.Printing.PrintDocument printDocument1;
     }
 }
