@@ -80,6 +80,38 @@ namespace SRichTextBoxLibrary
         }
 
         /********************************************************
+        ** ContextMenuStrip
+        */
+
+        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {   
+            if (this.SelectionLength <= 0)
+            {   //何も選択されていなければ、切り取り・コピーは選べない   
+                this.cutMenuItem.Enabled = false;
+                this.copyMenuItem.Enabled = false;
+            } else
+            {   //何か選択されていれば、切り取り・コピーは選択可能
+                this.cutMenuItem.Enabled = true;
+                this.copyMenuItem.Enabled = true;
+            }
+        }
+
+        private void cutMenuItem_Click(object sender, EventArgs e)
+        {   //切り取り
+            this.Cut();
+        }
+
+        private void copyMenuItem_Click(object sender, EventArgs e)
+        {   //コピー
+            this.Copy();
+        }
+
+        private void pasteMenuItem_Click(object sender, EventArgs e)
+        {   //貼り付け
+            this.Paste();
+        }
+
+        /********************************************************
         ** 印刷に使用
         */
 
@@ -169,6 +201,7 @@ namespace SRichTextBoxLibrary
             //Return last + 1 character printer
             return res.ToInt32();
         }
+
     }
 
 }
