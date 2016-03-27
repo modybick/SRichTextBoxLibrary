@@ -46,6 +46,11 @@ namespace SRichTextBoxLibrary
         private void toggleFontStyle(FontStyle style)
         {   //フォントスタイルを切り替え（トグル）
 
+            if (SelectionLength == 0)
+            {   //選択されていない場合
+                SelectionFont = new Font(SelectionFont, SelectionFont.Style ^ style);
+                return;
+            }
             //作業用RichTextBoxを生成
             RichTextBox bufRtb = new RichTextBox();
             //bufRtbにテキスト貼り付け
@@ -62,13 +67,11 @@ namespace SRichTextBoxLibrary
                 {   //一文字目が指定のスタイルを含む場合
                     bufRtb.SelectionFont =
                         new Font(bufRtb.SelectionFont, bufRtb.SelectionFont.Style ^ style);
-
                 }
                 else
                 {   //一文字目が指定のスタイルを含まない場合
                     bufRtb.SelectionFont =
                         new Font(bufRtb.SelectionFont, bufRtb.SelectionFont.Style | style);
-
                 }
 
             }
