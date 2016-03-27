@@ -17,25 +17,25 @@ namespace SRichTextBoxLibrary
         private void SRichTextBox_KeyDown(object sender, KeyEventArgs e)
         {   //ショートカットの設定
 
-            if (e.KeyCode == Keys.B && e.Control)
+            if (e.KeyCode == Keys.B && e.Control && !e.Shift)
             {   //Bold  [ctrl+B]
                 toggleFontStyle(FontStyle.Bold);
                 e.SuppressKeyPress = true;
             }
 
-            if (e.KeyCode == Keys.U && e.Control)
+            if (e.KeyCode == Keys.U && e.Control && !e.Shift)
             {   //Underline [ctrl+U]
                 toggleFontStyle(FontStyle.Underline);
                 e.SuppressKeyPress = true;
             }
 
-            if (e.KeyCode == Keys.T && e.Control)
+            if (e.KeyCode == Keys.T && e.Control && !e.Shift)
             {   //Strikeout [ctrl+T]
                 toggleFontStyle(FontStyle.Strikeout);
                 e.SuppressKeyPress = true;
             }
 
-            if (e.KeyCode == Keys.I && e.Control)
+            if (e.KeyCode == Keys.I && e.Control && !e.Shift)
             {   //Itaric [ctrl+I]
                 toggleFontStyle(FontStyle.Italic);
                 e.SuppressKeyPress = true;
