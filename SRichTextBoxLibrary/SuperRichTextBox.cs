@@ -60,21 +60,28 @@ namespace SRichTextBoxLibrary
             int selectionLength = this.SelectionLength; //選択範囲の長さ
             int selectionEnd = selectionStart + selectionLength;    //選択終了位置
 
-            for ( int x = 0; x < selectionLength; ++x )
-            {   //選択開始位置から終了位置までループ
-                bufRtb.Select(x, 1);  //一文字ずつ選択
-                if (this.SelectionFont.Style >= style)
-                {   //一文字目が指定のスタイルを含む場合
-                    bufRtb.SelectionFont =
-                        new Font(bufRtb.SelectionFont, bufRtb.SelectionFont.Style ^ style);
+            bufRtb.Select(0, 1);
+            if (bufRtb.SelectionFont.Style >= style)
+            {   //一文字目が指定のスタイルを含む場合
+                for (int x = 0; x < selectionLength; ++x)
+                {   //一文字目から終了位置までループ
+                    bufRtb.Select(x, 1);  //一文字ずつ選択
+                    if (bufRtb.SelectionFont.Style >= style)
+                    {
+                        bufRtb.SelectionFont =
+                            new Font(bufRtb.SelectionFont, bufRtb.SelectionFont.Style ^ style);
+                    }
                 }
-                else
-                {   //一文字目が指定のスタイルを含まない場合
+            } else
+            {   //一文字目が指定のスタイルを含まない場合
+                for (int x = 0; x < selectionLength; ++x)
+                {   //一文字目から終了位置までループ
+                    bufRtb.Select(x, 1);  //一文字ずつ選択
                     bufRtb.SelectionFont =
                         new Font(bufRtb.SelectionFont, bufRtb.SelectionFont.Style | style);
                 }
-
             }
+
             bufRtb.Select(0, selectionLength);
             this.SelectedRtf = bufRtb.SelectedRtf;
             bufRtb.Dispose();
