@@ -41,6 +41,11 @@ namespace SRichTextBoxLibrary
                 e.SuppressKeyPress = true;
             }
 
+            if (e.KeyCode == Keys.F && e.Control && !e.Shift)
+            {   //フォントダイアログ
+                showFontDialog();
+            }
+
         }
 
         private void toggleFontStyle(FontStyle style)
@@ -89,6 +94,15 @@ namespace SRichTextBoxLibrary
             this.Select(selectionStart, selectionLength);
         }
 
+        private void showFontDialog()
+        {
+            //フォントダイアログ
+            if (fontDialog1.ShowDialog() != DialogResult.Cancel)
+            {
+                this.SelectionFont = fontDialog1.Font;
+            }
+        }
+
         /********************************************************
         ** ContextMenuStrip
         */
@@ -119,6 +133,11 @@ namespace SRichTextBoxLibrary
         private void pasteMenuItem_Click(object sender, EventArgs e)
         {   //貼り付け
             this.Paste();
+        }
+
+        private void fontDialogMenuItem_Click(object sender, EventArgs e)
+        {   //フォント
+            showFontDialog();
         }
 
         /********************************************************
