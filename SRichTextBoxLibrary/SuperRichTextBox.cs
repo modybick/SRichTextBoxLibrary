@@ -59,16 +59,16 @@ namespace SRichTextBoxLibrary
             //作業用RichTextBoxを生成
             RichTextBox bufRtb = new RichTextBox();
             //bufRtbにテキスト貼り付け
-            bufRtb.Rtf = this.SelectedRtf;
+            bufRtb.Rtf = this.Rtf;
 
             int selectionStart = this.SelectionStart;   //選択開始位置
             int selectionLength = this.SelectionLength; //選択範囲の長さ
             int selectionEnd = selectionStart + selectionLength;    //選択終了位置
 
-            bufRtb.Select(0, 1);
+            bufRtb.Select(selectionStart, 1);
             if (bufRtb.SelectionFont.Style >= style)
             {   //一文字目が指定のスタイルを含む場合
-                for (int x = 0; x < selectionLength; ++x)
+                for (int x = selectionStart; x < selectionEnd; ++x)
                 {   //一文字目から終了位置までループ
                     bufRtb.Select(x, 1);  //一文字ずつ選択
                     if (bufRtb.SelectionFont.Style >= style)
@@ -79,7 +79,7 @@ namespace SRichTextBoxLibrary
                 }
             } else
             {   //一文字目が指定のスタイルを含まない場合
-                for (int x = 0; x < selectionLength; ++x)
+                for (int x = selectionStart; x < selectionEnd; ++x)
                 {   //一文字目から終了位置までループ
                     bufRtb.Select(x, 1);  //一文字ずつ選択
                     bufRtb.SelectionFont =
@@ -87,7 +87,7 @@ namespace SRichTextBoxLibrary
                 }
             }
 
-            bufRtb.Select(0, selectionLength);
+            bufRtb.Select(selectionStart, selectionLength);
             this.SelectedRtf = bufRtb.SelectedRtf;
             bufRtb.Dispose();
             //元の選択に戻す
