@@ -44,8 +44,14 @@ namespace SRichTextBoxLibrary
             if (e.KeyCode == Keys.F && e.Control && !e.Shift)
             {   //フォントダイアログ
                 showFontDialog();
+                e.SuppressKeyPress = true;
             }
 
+            if (e.KeyCode == Keys.A && e.Control && !e.Shift)
+            {   //全選択[ctrl+A]
+                SelectAll();
+                e.SuppressKeyPress = true;
+            }
         }
 
         private void toggleFontStyle(FontStyle style)
@@ -88,6 +94,10 @@ namespace SRichTextBoxLibrary
             }
 
             bufRtb.Select(selectionStart, selectionLength);
+            if (this.SelectedRtf.EndsWith(""))
+            {   //選択範囲の最後が空白で終わる場合
+                this.Select(SelectionStart, selectionLength);
+            }
             this.SelectedRtf = bufRtb.SelectedRtf;
             bufRtb.Dispose();
             //元の選択に戻す
