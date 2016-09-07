@@ -6,6 +6,9 @@ using System.Drawing.Printing;
 
 namespace SRichTextBoxLibrary
 {
+    /// <summary>
+    /// RichTextBoxを拡張したクラス
+    /// </summary>
     public partial class SuperRichTextBox: RichTextBox
     {
         public SuperRichTextBox()
@@ -14,8 +17,13 @@ namespace SRichTextBoxLibrary
             this.LanguageOption = RichTextBoxLanguageOptions.UIFonts;
         }
 
+        /// <summary>
+        /// ショートカットキーの設定
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">KeyEventArgs</param>
         private void SRichTextBox_KeyDown(object sender, KeyEventArgs e)
-        {   //ショートカットの設定
+        {
 
             if (e.KeyCode == Keys.B && e.Control && !e.Shift)
             {   //Bold  [ctrl+B]
@@ -48,15 +56,18 @@ namespace SRichTextBoxLibrary
             }
 
             if (e.KeyCode == Keys.A && e.Control && !e.Shift)
-            {   //全選択[ctrl+A]
+            {   //全選択 [ctrl+A]
                 SelectAll();
                 e.SuppressKeyPress = true;
             }
         }
 
+        /// <summary>
+        /// フォントスタイルの切り替え（トグル）
+        /// </summary>
+        /// <param name="style">ON/OFFするフォントスタイル</param>
         private void toggleFontStyle(FontStyle style)
-        {   //フォントスタイルを切り替え（トグル）
-
+        {
             if (SelectionLength == 0)
             {   //選択されていない場合
                 SelectionFont = new Font(SelectionFont, SelectionFont.Style ^ style);
@@ -104,9 +115,11 @@ namespace SRichTextBoxLibrary
             this.Select(selectionStart, selectionLength);
         }
 
+        /// <summary>
+        /// フォントダイアログの表示
+        /// </summary>
         private void showFontDialog()
         {
-            //フォントダイアログ
             if (fontDialog1.ShowDialog() != DialogResult.Cancel)
             {
                 this.SelectionFont = fontDialog1.Font;
@@ -117,6 +130,11 @@ namespace SRichTextBoxLibrary
         ** ContextMenuStrip
         */
 
+        /// <summary>
+        /// メニューストリップが開いた時
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">CancelEventArgs</param>
         private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {   
             if (this.SelectionLength <= 0)
@@ -130,29 +148,94 @@ namespace SRichTextBoxLibrary
             }
         }
 
+        /// <summary>
+        /// メニュー_切り取り
+        /// </summary>
         private void cutMenuItem_Click(object sender, EventArgs e)
-        {   //切り取り
+        {
             this.Cut();
         }
 
+        /// <summary>
+        /// メニュー_コピー
+        /// </summary>
         private void copyMenuItem_Click(object sender, EventArgs e)
-        {   //コピー
+        {
             this.Copy();
         }
 
+        /// <summary>
+        /// メニュー_貼り付け
+        /// </summary>
         private void pasteMenuItem_Click(object sender, EventArgs e)
-        {   //貼り付け
+        {
             this.Paste();
         }
 
+        /// <summary>
+        /// メニュー_フォントダイアログ
+        /// </summary>
         private void fontDialogMenuItem_Click(object sender, EventArgs e)
-        {   //フォント
+        {
             showFontDialog();
         }
 
-        /********************************************************
-        ** 印刷に使用
-        */
+        /*******************************************************
+         * 印刷関係
+         */
+
+        /// <summary>
+        /// プリント確認
+        /// </summary>
+        private int checkPrint;
+
+        /// <summary>
+        /// 印刷開始時
+        /// </summary>
+        private void printDocument1_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            checkPrint = 0;
+        }
+
+        /// <summary>
+        /// 印刷時（各ページ）
+        /// </summary>
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            // Print the content of RichTextBox. Store the last character printed.
+            checkPrint = this.Print(checkPrint, this.TextLength, e);
+
+            // Check for more pages
+            if (checkPrint < this.TextLength)
+                e.HasMorePages = true;
+            else
+                e.HasMorePages = false;
+        }
+        
+        /// <summary>
+        /// 印刷
+        /// </summary>
+        public void print()
+        {
+            if (printDialog1.ShowDialog() == DialogResult.OK)
+                printDocument1.Print();
+        }
+
+        /// <summary>
+        /// 印刷プレビュー
+        /// </summary>
+        public void showPrintPreview()
+        {
+            printPreviewDialog1.ShowDialog();
+        }
+
+        /// <summary>
+        /// 印刷ページ設定
+        /// </summary>
+        public void printPageSetup()
+        {
+            pageSetupDialog1.ShowDialog();
+        }
 
         //Convert the unit used by the .NET framework (1/100 inch) 
         //and the unit used by Win32 API calls (twips 1/1440 inch)
@@ -240,6 +323,7 @@ namespace SRichTextBoxLibrary
             //Return last + 1 character printer
             return res.ToInt32();
         }
+
 
     }
 
