@@ -11,6 +11,9 @@ namespace SRichTextBoxLibrary
     /// </summary>
     public partial class SuperRichTextBox: RichTextBox
     {
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public SuperRichTextBox()
         {
             InitializeComponent();
@@ -183,6 +186,15 @@ namespace SRichTextBoxLibrary
         /*******************************************************
          * 印刷関係
          */
+
+        /// <summary>
+        /// プリントドキュメントを取得する。
+        /// </summary>
+        /// <returns>PrintDocumentを返す。</returns>
+        public PrintDocument getPrintDocument()
+        {
+            return this.printDocument1;
+        }
 
         /// <summary>
         /// プリント確認
