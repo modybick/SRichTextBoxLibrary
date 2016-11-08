@@ -121,7 +121,7 @@ namespace SRichTextBoxLibrary
         /// <summary>
         /// フォントダイアログの表示
         /// </summary>
-        private void showFontDialog()
+        public void showFontDialog()
         {
             if (fontDialog1.ShowDialog() != DialogResult.Cancel)
             {
